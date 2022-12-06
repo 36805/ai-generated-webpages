@@ -1,0 +1,60 @@
+<html>
+<head>
+<style>
+  .game {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+  }
+
+  .warning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.5);
+    transition: background-color 1s ease;
+    display: none;
+  }
+
+  .explosion {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://media.giphy.com/media/3o7aCTQ2QkJcQZF5nK/giphy.gif");
+    background-size: cover;
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div class="game">
+    <div class="warning"></div>
+    <div class="explosion"></div>
+    <h1>Welcome to the Logic Game!</h1>
+    <p>Solve the puzzle to proceed:</p>
+    <p>1 + 1 = ?</p>
+    <input type="text" id="answer" placeholder="Enter your answer here">
+    <button onclick="checkAnswer()">Submit</button>
+  </div>
+  <script>
+    function checkAnswer() {
+      var answer = document.getElementById("answer").value;
+      if (answer == 2) {
+        alert("Correct! You may continue playing the game.");
+      } else {
+        document.querySelector(".warning").style.display = "block";
+        setTimeout(function() {
+          document.querySelector(".explosion").style.display = "block";
+        }, 5000);
+        setTimeout(function() {
+          var a = document.createElement("a");
+          var file = new Blob(["You should not be playing games if you don't know 1 + 1"], {type: "text/plain"});
+          a.href = URL.createObjectURL(file);
+          a.download = "notice.txt";
+          a.click();
+        }, 5500);
+      }
+    }
+  </script>
+</body>
+</html>
